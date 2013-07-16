@@ -35,6 +35,8 @@ module RestClient
       if (200..207).include? code
         self
       elsif 422 == code
+        puts "="*50
+        puts "we shouldn't raise exception"
         self # do not raise exception on 422 code
       elsif [301, 302, 307].include? code
         unless [:get, :head].include? args[:method]
