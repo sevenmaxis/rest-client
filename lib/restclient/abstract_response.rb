@@ -40,6 +40,7 @@ module RestClient
         self # do not raise exception on 422 code
       elsif [301, 302, 307].include? code
         unless [:get, :head].include? args[:method]
+          puts "raise Exceptions::EXCEPTIONS_MAP[code].new(self, code)"
           raise Exceptions::EXCEPTIONS_MAP[code].new(self, code)
         else
           follow_redirection(request, result, & block)
@@ -49,6 +50,7 @@ module RestClient
         args.delete :payload
         follow_redirection(request, result, & block)
       elsif Exceptions::EXCEPTIONS_MAP[code]
+        puts "raise Exceptions::EXCEPTIONS_MAP[code].new(self, code)"
         raise Exceptions::EXCEPTIONS_MAP[code].new(self, code)
       else
         raise RequestFailed.new(self, code)
