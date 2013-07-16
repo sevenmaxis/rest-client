@@ -42,7 +42,8 @@ module RestClient
               417 => 'Expectation Failed',
               418 => 'I\'m A Teapot',
               421 => 'Too Many Connections From This IP',
-              422 => 'Unprocessable Entity', #WebDAV
+              # we don't need to raise exception on 422 code
+              #422 => 'Unprocessable Entity', #WebDAV
               423 => 'Locked', #WebDAV
               424 => 'Failed Dependency', #WebDAV
               425 => 'Unordered Collection', #WebDAV
