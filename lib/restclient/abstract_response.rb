@@ -34,6 +34,8 @@ module RestClient
     def return! request = nil, result = nil, & block
       if (200..207).include? code
         self
+      elsif 422 == code
+        self # do not raise exception on 422 code
       elsif [301, 302, 307].include? code
         unless [:get, :head].include? args[:method]
           raise Exceptions::EXCEPTIONS_MAP[code].new(self, code)
